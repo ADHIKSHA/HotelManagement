@@ -1,0 +1,4 @@
+order:-
+coffee             50
+tea                20
+total              70

@@ -1,0 +1,35 @@
+<?php  
+$connect = mysqli_connect("localhost:3307", "root", "", "users");
+
+if(isset($_POST["submit"]))
+{
+mysqli_select_db($connect,'users');
+$sql="insert into user (Name,PhoneNo,Email,Feedback) values ($Uname,$Email,$PhoneNo,$Feedback);"
+mysqli_query($connect,$sql);
+mysqli_close();
+$file=file('process.csv');
+foreach($file as $k){
+$csv[]=explode(',',$k);
+
+}
+$status=($csv[1][0]);
+if($status =="ready")
+	$img_link="ready.jpg";
+else
+	$img_link="load.gif";
+$time=($csv[1][1]);
+
+}
+?>  
+<html>
+<body>
+<p>Status of your ORDER:-</p>
+<br><br><br><br>
+<p style="text-align:center;font-color:red;font-size:200%;">Stage:-<?php echo $status?></p>
+<p style="text-align:center;font-color:green;font-size:150%;">It will take more:-<?php echo $time?> minutes</p>
+
+<img src=<?php echo $img_link; ?> style="padding-left: 32.5em" align="centre">
+sleep(3600);
+<?php include 'hello.php'?>
+</body>
+</html>
